@@ -1,12 +1,15 @@
 package com.example.amrsaidam.weather.Models;
 
+import com.example.amrsaidam.weather.Interfaces.SQLModels;
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by amrsaidam on 1/2/19.
  */
 
-public class Weather {
+public class Weather implements SQLModels{
+
+    public static final String TABLE_NAME = "weathers";
 
     @SerializedName("id")
     private int id;
@@ -51,4 +54,18 @@ public class Weather {
     public void setIcon(String icon) {
         this.icon = icon;
     }
+
+
+    public  String createTable() {
+        return "CREATE TABLE " + TABLE_NAME +
+                "(id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "main TEXT," +
+                "description TEXT," +
+                "icon TEXT)";
+    }
+
+    public  String dropTable() {
+        return "DROP TABLE IF EXISTS " + TABLE_NAME;
+    }
+
 }

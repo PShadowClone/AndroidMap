@@ -15,9 +15,9 @@ import retrofit2.Callback;
 
 public class ReponseGateWay {
 
-    public static void init(final ResponseInterface responseInterface) {
+    public static void init(final ResponseInterface responseInterface,  String country) {
         GetDataService service = RetrofitInstance.getRetrofitInstance().create(GetDataService.class);
-        Call<Response> call = service.getWeather();
+        Call<Response> call = service.getWeather(country);
         call.enqueue(new Callback<Response>() {
             @Override
             public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
