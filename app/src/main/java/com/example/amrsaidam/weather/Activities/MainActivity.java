@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     AppCompatEditText countryName;
     AppCompatTextView temp;
     Database database;
+    retrofit2.Response<Response> responses = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,24 +42,26 @@ public class MainActivity extends AppCompatActivity {
         database = new Database(this);
     }
 
+    public void like(View view) {
+        if (this.responses == null) {
+            Toast.makeText(this.getBaseContext(), R.string.no_result_to_save, Toast.LENGTH_LONG).show();
+            return;
+        }
+        responses.body().getMain().addData(database);
+        Toast.makeText(this.getBaseContext(), R.string.data_saved, Toast.LENGTH_LONG).show();
+    }
+
 
     public void search(View view) {
         config.runProgress();
         String countryName = this.countryName.getText().toString();
-        Toast.makeText(this.getBaseContext(), countryName , Toast.LENGTH_LONG).show();
+        Toast.makeText(this.getBaseContext(), countryName, Toast.LENGTH_LONG).show();
+
         ReponseGateWay.init(new ResponseInterface() {
             @Override
             public void success(retrofit2.Response<Response> response) {
-                temp.setText(" "+response.body().getMain().getTemp());
-                database.addData("test");
-                Cursor data = database.getData();
-
-                while(data.moveToNext()){
-                    //get the value from the database in column 1
-                    //then add it to the ArrayList
-                    Log.d("DB DATA" ,data.getString(1));
-                }
-
+                temp.setText(" " + response.body().getMain().getTemp());
+                responses = response;
             }
 
             @Override
@@ -70,12 +74,12 @@ public class MainActivity extends AppCompatActivity {
 
                 config.hideProgress();
             }
-        },countryName);
+        }, countryName);
 
     }
 
 
-    private void getView(){
+    private void getView() {
         button = findViewById(R.id.search);
         config = new Config(this);
         countryName = findViewById(R.id.countryName);

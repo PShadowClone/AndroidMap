@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="100"
-    tools:context="com.example.amrsaidam.weather.Activities.MainActivity">
+    android:weightSum="100">
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/countryName"
@@ -26,7 +24,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="50"
-            android:onClick="search"
+
             android:text="@string/search" />
 
         <android.support.v7.widget.AppCompatButton
@@ -34,7 +32,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="50"
-            android:onClick="like"
+
             android:text="@string/like" />
 
     </android.support.v7.widget.LinearLayoutCompat>
@@ -56,6 +54,4 @@
             android:text="test" />
 
     </android.support.v7.widget.LinearLayoutCompat>
-
-
 </android.support.v7.widget.LinearLayoutCompat>

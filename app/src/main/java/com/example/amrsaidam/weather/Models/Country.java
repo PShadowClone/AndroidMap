@@ -1,5 +1,6 @@
 package com.example.amrsaidam.weather.Models;
 
+import com.example.amrsaidam.weather.DB.Database;
 import com.example.amrsaidam.weather.Interfaces.SQLModels;
 
 /**
@@ -39,5 +40,15 @@ public class Country  implements SQLModels{
     @Override
     public String dropTable() {
         return "DROP TABLE IF EXISTS "+TABLE_NAME;
+    }
+
+    @Override
+    public boolean addData(Database database) {
+        return false;
+    }
+
+    @Override
+    public Object getData(Database database) {
+        return null;
     }
 }
