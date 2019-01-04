@@ -1,11 +1,13 @@
 package com.example.amrsaidam.weather.Fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,15 +33,23 @@ public class Home extends Fragment {
     AppCompatTextView temp;
     Database database;
     retrofit2.Response<Response> responses = null;
+    String searchedVvalue;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         this.getView(view);
         database = new Database(this.getActivity());
+        try {
+            String content = getArguments().getString("searchedValue");
+//            this.searchedVvalue = content;
+            this.search(content);
+        } catch (NullPointerException nullPointerException) {
+        }
         return view;
 
     }
@@ -55,9 +65,9 @@ public class Home extends Fragment {
     }
 
 
-    public void search(View view) {
+    public void search(String searchedVvalue) {
         config.runProgress();
-        String countryName = this.countryName.getText().toString();
+        String countryName = searchedVvalue;
         Toast.makeText(this.getActivity().getBaseContext(), countryName, Toast.LENGTH_LONG).show();
 
         ReponseGateWay.init(new ResponseInterface() {
@@ -88,12 +98,6 @@ public class Home extends Fragment {
         config = new Config(this.getActivity());
         countryName = view.findViewById(R.id.countryName);
         temp = view.findViewById(R.id.temp);
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                search(view);
-            }
-        });
         likeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
