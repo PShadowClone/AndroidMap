@@ -20,6 +20,8 @@ import com.example.amrsaidam.weather.Network.ReponseGateWay;
 import com.example.amrsaidam.weather.R;
 import com.example.amrsaidam.weather.Utilities.Config;
 
+import java.util.List;
+
 /**
  * Created by amrsaidam on 1/4/19.
  */
@@ -33,21 +35,18 @@ public class Home extends Fragment {
     AppCompatTextView temp;
     Database database;
     retrofit2.Response<Response> responses = null;
-    String searchedVvalue;
+    String searchedValue;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         this.getView(view);
         database = new Database(this.getActivity());
         try {
-            String content = getArguments().getString("searchedValue");
-//            this.searchedVvalue = content;
-            this.search(content);
+            searchedValue = getArguments().getString("searchedValue");
+            this.search(searchedValue);
         } catch (NullPointerException nullPointerException) {
         }
         return view;
@@ -60,7 +59,16 @@ public class Home extends Fragment {
             Toast.makeText(this.getActivity().getBaseContext(), R.string.no_result_to_save, Toast.LENGTH_LONG).show();
             return;
         }
-        responses.body().getMain().addData(database);
+        Response response = responses.body();
+        List<Response> dbResponse = (List<Response>) response.get(database, searchedValue);
+
+        if (dbResponse.size() > 0) {
+            Toast.makeText(this.getActivity().getBaseContext(), R.string.value_existed, Toast.LENGTH_LONG).show();
+            return;
+        }
+        long countryId = response.addDataCustom(database);
+
+        responses.body().getMain().getInstance().setCountryId(countryId).addData(database);
         Toast.makeText(this.getActivity().getBaseContext(), R.string.data_saved, Toast.LENGTH_LONG).show();
     }
 

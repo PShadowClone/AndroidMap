@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/row_card"
+    android:orientation="vertical"
+    android:weightSum="100">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/temp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="50"
+        android:gravity="center"
+        android:text="Test"
+
+        android:textSize="30sp" />
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="50"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/min_temp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="25"
+            android:gravity="center"
+            android:text="Test"
+            android:textAlignment="center"
+            android:textSize="30sp" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/humidity"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="25"
+            android:gravity="center"
+            android:text="Test"
+            android:textAlignment="center"
+            android:textSize="30sp" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/pressure"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="25"
+            android:gravity="center"
+            android:text="Test"
+            android:textAlignment="center"
+            android:textSize="30sp" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/max_temp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="25"
+            android:gravity="center"
+            android:text="Test"
+            android:textAlignment="center"
+            android:textSize="30sp" />
+    </android.support.v7.widget.LinearLayoutCompat>
+
+
+</android.support.v7.widget.LinearLayoutCompat>

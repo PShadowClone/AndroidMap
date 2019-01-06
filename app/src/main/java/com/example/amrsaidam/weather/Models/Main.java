@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.amrsaidam.weather.DB.Database;
 import com.example.amrsaidam.weather.Interfaces.SQLModels;
@@ -19,17 +20,21 @@ import java.util.List;
 public class Main implements SQLModels {
 
     public static final String TABLE_NAME = "main";
+    private long countryId;
 
     public Main() {
     }
 
-    public Main(float temp, float humidity, float pressure, float tempMin, float tempMax) {
+    public Main(float temp, float humidity, float pressure, float tempMin, float tempMax, int countryId) {
         this.temp = temp;
         this.humidity = humidity;
         this.pressure = pressure;
         this.tempMin = tempMin;
+        this.countryId = countryId;
         this.tempMax = tempMax;
+
     }
+
 
     @SerializedName("temp")
     private float temp;
@@ -87,6 +92,19 @@ public class Main implements SQLModels {
     }
 
 
+    public Main getInstance() {
+        return this;
+    }
+
+    public Main setCountryId(long countryId) {
+        this.countryId = countryId;
+        return this;
+    }
+
+    public long getCountryId() {
+        return this.countryId;
+    }
+
     @Override
     public String createTable() {
         return "CREATE TABLE " + TABLE_NAME +
@@ -95,7 +113,8 @@ public class Main implements SQLModels {
                 "humidity FLOAT," +
                 "pressure FLOAT," +
                 "temp_min FLOAT," +
-                "temp_max FLOAT)";
+                "temp_max FLOAT," +
+                "country_id INTEGER)";
     }
 
     @Override
@@ -112,7 +131,10 @@ public class Main implements SQLModels {
         contentValues.put("pressure", this.getPressure());
         contentValues.put("temp_min", this.getTempMin());
         contentValues.put("temp_max", this.getTempMax());
-        long result = db.insert(Weather.TABLE_NAME, null, contentValues);
+        contentValues.put("country_id", this.getCountryId());
+
+        long result = db.insert(TABLE_NAME, null, contentValues);
+        Log.d("Inserted id", " " + result);
         if (result == -1) {
             return false;
         } else {
@@ -124,11 +146,11 @@ public class Main implements SQLModels {
     @Override
     public Object getData(Database database) {
         SQLiteDatabase db = database.getWritableDatabase();
-        String query = "SELECT * FROM " + Weather.TABLE_NAME;
+        String query = "SELECT * FROM " + TABLE_NAME;
         Cursor data = db.rawQuery(query, null);
         List<Main> result = new ArrayList<>();
         while (data.moveToNext()) {
-            result.add(new Main(data.getFloat(1), data.getFloat(2), data.getFloat(3), data.getFloat(4), data.getFloat(5)));
+            result.add(new Main(data.getFloat(0), data.getFloat(1), data.getFloat(2), data.getFloat(3), data.getFloat(4), data.getInt(5)));
         }
         return result;
     }

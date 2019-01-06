@@ -1,14 +1,39 @@
 package com.example.amrsaidam.weather.Models;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+import com.example.amrsaidam.weather.DB.Database;
+import com.example.amrsaidam.weather.Interfaces.SQLModels;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by amrsaidam on 1/2/19.
  */
 
-public class Response {
+public class Response implements SQLModels {
+
+    public static final String TABLE_NAME = "countries";
+
+    public Response() {
+    }
+
+    public Response(int id, String name, int cod, float dt, int liked) {
+        this.id = id;
+        this.name = name;
+        this.cod = cod;
+        this.dt = dt;
+        this.liked = liked;
+
+    }
+
+
+    private int liked;
 
     @SerializedName("id")
     private int id;
@@ -129,5 +154,75 @@ public class Response {
 
     public void setWeatherList(List<Weather> weatherList) {
         this.weatherList = weatherList;
+    }
+
+    public void setLiked(int liked) {
+        this.liked = liked;
+    }
+
+    public int getLiked() {
+        return this.liked;
+    }
+
+    public Response getInstance() {
+        return this;
+    }
+
+    @Override
+    public String createTable() {
+        return "CREATE TABLE " + TABLE_NAME +
+                "(id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "name TEXT," +
+                "code INTEGER," +
+                "dt FLOAT," +
+                "liked INTEGER)";
+    }
+
+    @Override
+    public String dropTable() {
+        return "DROP TABLE IF EXISTS " + TABLE_NAME;
+    }
+
+    @Override
+    public boolean addData(Database database) {
+        return false;
+    }
+
+
+    public long addDataCustom(Database database) {
+        SQLiteDatabase db = database.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", this.getName());
+        contentValues.put("cod", this.getCod());
+        contentValues.put("dt", this.getDt());
+        contentValues.put("liked", this.getLiked());
+        long result = db.insert(TABLE_NAME, null, contentValues);
+        return result;
+    }
+
+    @Override
+    public Object getData(Database database) {
+        SQLiteDatabase db = database.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME;
+        Cursor data = db.rawQuery(query, null);
+        List<Response> result = new ArrayList<>();
+        while (data.moveToNext()) {
+            result.add(new Response(data.getInt(0), data.getString(1), data.getInt(2), data.getFloat(3), data.getInt(4)));
+        }
+        return result;
+    }
+
+
+    public Object get(Database database, String name) {
+        SQLiteDatabase db = database.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE name = '" + name + "'";
+        Cursor data = db.rawQuery(query, null);
+        List<Response> result = new ArrayList<>();
+        while (data.moveToNext()) {
+            result.add(new Response(data.getInt(0), data.getString(1), data.getInt(2), data.getFloat(3), data.getInt(4)));
+        }
+
+        return result;
+
     }
 }
