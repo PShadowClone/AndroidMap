@@ -20,6 +20,7 @@ import com.example.amrsaidam.weather.R;
 public class MasterActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private TextView mTextMessage;
+    BottomNavigationView navigation;
     //
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -33,9 +34,6 @@ public class MasterActivity extends AppCompatActivity implements BottomNavigatio
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_dashboard);
                     return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
-                    return true;
             }
             return false;
         }
@@ -47,7 +45,7 @@ public class MasterActivity extends AppCompatActivity implements BottomNavigatio
         setContentView(R.layout.activity_master);
 
         mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
         loadFragment(new Home());
         navigation.setOnNavigationItemSelectedListener(this);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
@@ -74,7 +72,7 @@ public class MasterActivity extends AppCompatActivity implements BottomNavigatio
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu, menu);
         MenuItem menuItem = menu.findItem(R.id.search);
@@ -87,6 +85,7 @@ public class MasterActivity extends AppCompatActivity implements BottomNavigatio
                 bundle.putString("searchedValue", s);
                 home.setArguments(bundle);
                 loadFragment(home);
+//                navigation.getMenu().getItem(R.id.navigation_home).setChecked(true);
                 return false;
             }
 

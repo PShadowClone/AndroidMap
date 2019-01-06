@@ -6,4 +6,5 @@
     <color name="max_temp">#f7315e</color>
     <color name="min_temp">#ccc2c2</color>
     <color name="sun">#ffdd00</color>
+    <color name="like">#c2271f</color>
 </resources>
