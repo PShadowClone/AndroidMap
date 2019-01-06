@@ -4,18 +4,73 @@
     android:layout_height="wrap_content"
     android:background="@drawable/row_card"
     android:orientation="vertical"
+    android:padding="10dp"
     android:weightSum="100">
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/temp"
+    <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_gravity="center_vertical"
-        android:layout_weight="50"
-        android:gravity="center"
-        android:text="Test"
+        android:layout_weight="10"
+        android:orientation="horizontal"
+        android:weightSum="100">
 
-        android:textSize="30sp" />
+        <android.support.v7.widget.AppCompatTextView
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right|center"
+            android:layout_weight="40"
+            android:fontFamily="@font/fontawesome_awesome"
+            android:gravity="right|center"
+            android:text="\uf041"
+            android:textSize="20sp"
+            android:paddingRight="5sp"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/countryName"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left|center"
+            android:layout_weight="50"
+            android:textSize="20sp" />
+
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10sp"
+        android:layout_weight="50"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/temp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="55"
+            android:gravity="right"
+            android:text="Test"
+
+            android:textSize="30sp" />
+
+        <android.support.v7.widget.AppCompatTextView
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="30"
+            android:fontFamily="@font/fontawesome_awesome"
+            android:gravity="left"
+            android:text="\uf185"
+            android:textColor="@color/sun"
+            android:textSize="15sp" />
+
+
+    </android.support.v7.widget.LinearLayoutCompat>
 
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -24,45 +79,135 @@
         android:orientation="horizontal"
         android:weightSum="100">
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/min_temp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="25"
-            android:gravity="center"
-            android:text="Test"
-            android:textAlignment="center"
-            android:textSize="30sp" />
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/humidity"
+        <android.support.v7.widget.LinearLayoutCompat
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="25"
-            android:gravity="center"
-            android:text="Test"
-            android:textAlignment="center"
-            android:textSize="30sp" />
+            android:orientation="horizontal"
+            android:weightSum="100">
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/pressure"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="25"
-            android:gravity="center"
-            android:text="Test"
-            android:textAlignment="center"
-            android:textSize="30sp" />
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/max_temp"
+            <android.support.v7.widget.AppCompatTextView
+
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="20"
+                android:fontFamily="@font/fontawesome_awesome"
+                android:gravity="center"
+                android:text="\uf2cb"
+                android:textAlignment="center"
+                android:textColor="@color/min_temp"
+                android:textSize="15sp" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/min_temp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="80"
+                android:gravity="left|center"
+                android:text="Test"
+                android:textSize="15sp" />
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+        <android.support.v7.widget.LinearLayoutCompat
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="25"
-            android:gravity="center"
-            android:text="Test"
-            android:textAlignment="center"
-            android:textSize="30sp" />
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+
+            <android.support.v7.widget.AppCompatTextView
+
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="20"
+                android:fontFamily="@font/fontawesome_awesome"
+                android:gravity="center"
+                android:text="\uf0c2"
+                android:textAlignment="center"
+
+                android:textSize="15sp" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/humidity"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="80"
+                android:gravity="left|center"
+                android:paddingLeft="5sp"
+                android:textSize="15sp" />
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="25"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+
+            <android.support.v7.widget.AppCompatTextView
+
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="20"
+                android:fontFamily="@font/fontawesome_awesome"
+                android:gravity="center"
+                android:text="\uf0e4"
+                android:textAlignment="center"
+                android:textSize="15sp" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/pressure"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="80"
+                android:gravity="left|center"
+                android:paddingLeft="5sp"
+                android:text="Test"
+                android:textSize="15sp" />
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="25"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+
+            <android.support.v7.widget.AppCompatTextView
+
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="20"
+                android:fontFamily="@font/fontawesome_awesome"
+                android:gravity="center"
+                android:text="\uf2c7"
+                android:textAlignment="center"
+                android:textColor="@color/max_temp"
+                android:textSize="15sp" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/max_temp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="80"
+                android:gravity="left|center"
+                android:paddingLeft="5sp"
+                android:text="Test"
+                android:textSize="15sp" />
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+
     </android.support.v7.widget.LinearLayoutCompat>
 
 

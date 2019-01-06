@@ -173,7 +173,7 @@ public class Response implements SQLModels {
         return "CREATE TABLE " + TABLE_NAME +
                 "(id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "name TEXT," +
-                "code INTEGER," +
+                "cod INTEGER," +
                 "dt FLOAT," +
                 "liked INTEGER)";
     }
@@ -213,7 +213,7 @@ public class Response implements SQLModels {
     }
 
 
-    public Object get(Database database, String name) {
+    public Object getByName(Database database, String name) {
         SQLiteDatabase db = database.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE name = '" + name + "'";
         Cursor data = db.rawQuery(query, null);
@@ -221,7 +221,6 @@ public class Response implements SQLModels {
         while (data.moveToNext()) {
             result.add(new Response(data.getInt(0), data.getString(1), data.getInt(2), data.getFloat(3), data.getInt(4)));
         }
-
         return result;
 
     }

@@ -22,6 +22,8 @@ public class Main implements SQLModels {
     public static final String TABLE_NAME = "main";
     private long countryId;
 
+    private String countryName;
+
     public Main() {
     }
 
@@ -92,6 +94,16 @@ public class Main implements SQLModels {
     }
 
 
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+
+    }
+
+    public String getCountryName() {
+        return this.countryName;
+
+    }
+
     public Main getInstance() {
         return this;
     }
@@ -142,15 +154,31 @@ public class Main implements SQLModels {
         }
     }
 
+    public int updateByCountryId(Database database, int countryId) {
+        SQLiteDatabase db = database.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("temp", this.getTemp());
+        contentValues.put("humidity", this.getHumidity());
+        contentValues.put("pressure", this.getPressure());
+        contentValues.put("temp_min", this.getTempMin());
+        contentValues.put("temp_max", this.getTempMax());
+        int result = db.update(TABLE_NAME, contentValues, "id=" + countryId, null);
+        return result;
+    }
+
 
     @Override
     public Object getData(Database database) {
         SQLiteDatabase db = database.getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME;
+        String query = "SELECT " + TABLE_NAME + ".* , " + Response.TABLE_NAME + ".name FROM " + TABLE_NAME +
+                " INNER JOIN " + Response.TABLE_NAME +
+                " ON " + TABLE_NAME + ".country_id = " + Response.TABLE_NAME + ".id";
         Cursor data = db.rawQuery(query, null);
         List<Main> result = new ArrayList<>();
         while (data.moveToNext()) {
-            result.add(new Main(data.getFloat(0), data.getFloat(1), data.getFloat(2), data.getFloat(3), data.getFloat(4), data.getInt(5)));
+            Main main = new Main(data.getFloat(0), data.getFloat(1), data.getFloat(2), data.getFloat(3), data.getFloat(4), data.getInt(5));
+            main.setCountryName(data.getString(7));
+            result.add(main);
         }
         return result;
     }

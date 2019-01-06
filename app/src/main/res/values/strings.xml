@@ -10,5 +10,5 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="value_existed">The value is existed for this country</string>
+    <string name="value_existed">The values for country updated successfully</string>
 </resources>

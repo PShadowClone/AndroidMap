@@ -60,9 +60,9 @@ public class Home extends Fragment {
             return;
         }
         Response response = responses.body();
-        List<Response> dbResponse = (List<Response>) response.get(database, searchedValue);
-
+        List<Response> dbResponse = (List<Response>) response.getByName(database, searchedValue);
         if (dbResponse.size() > 0) {
+            responses.body().getMain().getInstance().updateByCountryId(database, dbResponse.get(0).getId());
             Toast.makeText(this.getActivity().getBaseContext(), R.string.value_existed, Toast.LENGTH_LONG).show();
             return;
         }

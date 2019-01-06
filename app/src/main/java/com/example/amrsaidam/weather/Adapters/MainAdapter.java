@@ -39,6 +39,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         holder.max_temp.setText("" + this.mains.get(position).getTempMax());
         holder.pressure.setText("" + this.mains.get(position).getPressure());
         holder.temp.setText("" + this.mains.get(position).getTemp());
+        holder.countryName.setText("" + this.mains.get(position).getCountryName());
 
     }
 
@@ -49,7 +50,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 
     class MainViewHolder extends RecyclerView.ViewHolder {
 
-        AppCompatTextView temp, min_temp, max_temp, humidity, pressure;
+        AppCompatTextView temp, min_temp, max_temp, humidity, pressure, countryName;
 
 
         MainViewHolder(View itemView) {
@@ -59,6 +60,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
             max_temp = (AppCompatTextView) itemView.findViewById(R.id.max_temp);
             humidity = (AppCompatTextView) itemView.findViewById(R.id.humidity);
             pressure = (AppCompatTextView) itemView.findViewById(R.id.pressure);
+            countryName = (AppCompatTextView) itemView.findViewById(R.id.countryName);
 
         }
     }

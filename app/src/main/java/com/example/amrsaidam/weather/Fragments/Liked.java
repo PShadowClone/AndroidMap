@@ -1,5 +1,6 @@
 package com.example.amrsaidam.weather.Fragments;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
@@ -43,6 +44,8 @@ public class Liked extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         recyclerView.setAdapter(adapter);
+
+
 
 
         return view;

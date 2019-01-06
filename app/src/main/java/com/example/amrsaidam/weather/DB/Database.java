@@ -19,7 +19,7 @@ import com.example.amrsaidam.weather.Models.Weather;
 
 public class Database extends SQLiteOpenHelper {
 
-    private static final String DB_NAME = "data.db";
+    private static final String DB_NAME = "data.wet";
     private static final int VERSION = 1;
 
     private Weather weather;
@@ -36,6 +36,7 @@ public class Database extends SQLiteOpenHelper {
         this.country = new Country();
         this.response = new Response();
         this.context = context;
+
     }
 
     @Override
