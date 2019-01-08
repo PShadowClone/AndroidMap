@@ -21,6 +21,9 @@ public class ReponseGateWay {
         call.enqueue(new Callback<Response>() {
             @Override
             public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                if(response.body() == null)
+                    responseInterface.always(null);
+                else
                 responseInterface.success(response);
                 responseInterface.always(response);
             }

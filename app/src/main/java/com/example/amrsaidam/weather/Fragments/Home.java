@@ -24,6 +24,7 @@ import com.example.amrsaidam.weather.Network.ReponseGateWay;
 import com.example.amrsaidam.weather.R;
 import com.example.amrsaidam.weather.Utilities.Config;
 
+import java.net.UnknownHostException;
 import java.util.List;
 
 /**
@@ -83,8 +84,6 @@ public class Home extends Fragment {
     public void search(String searchedVvalue) {
         config.runProgress();
         final String countryNameForSearch = searchedVvalue;
-        Toast.makeText(this.getActivity().getBaseContext(), countryNameForSearch, Toast.LENGTH_LONG).show();
-
         ReponseGateWay.init(new ResponseInterface() {
             @Override
             public void success(retrofit2.Response<Response> response) {
@@ -118,10 +117,16 @@ public class Home extends Fragment {
             @Override
             public void Failure(Throwable t) {
 
+
             }
 
             @Override
             public void always(Object t) {
+                if(t == null)
+                    Toast.makeText(Home.this.getActivity().getBaseContext() , "Invalid country name",Toast.LENGTH_LONG).show();
+                else if(t instanceof UnknownHostException)
+                    Toast.makeText(Home.this.getActivity().getBaseContext() , "No internet connection",Toast.LENGTH_LONG).show();
+                Log.d("Exception" , t.toString());
                 config.hideProgress();
             }
         }, countryNameForSearch);
